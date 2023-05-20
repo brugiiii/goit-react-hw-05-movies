@@ -17,23 +17,29 @@ const Cast = () => {
   useEffect(() => {
     api.movieId = movieId;
     api.fetch('credits').then(setCredits);
-  }, [credits, movieId]);
+  }, [movieId]);
 
   return (
     <>
       <CastList>
-        {credits.map(({ id, profile_path, name, character }) => (
-          <li key={id}>
-            <Img
-              src={
-                profile_path ? BASE_IMG_URL + profile_path : DEFAULT_POSTER_URL
-              }
-              alt={name}
-            />
-            <p>{name}</p>
-            <p>{character}</p>
-          </li>
-        ))}
+        {credits.length !== 0 ? (
+          credits.map(({ id, profile_path, name, character }) => (
+            <li key={id}>
+              <Img
+                src={
+                  profile_path
+                    ? BASE_IMG_URL + profile_path
+                    : DEFAULT_POSTER_URL
+                }
+                alt={name}
+              />
+              <p>{name}</p>
+              <p>{character}</p>
+            </li>
+          ))
+        ) : (
+          <div>We dont have any cast for this movie.</div>
+        )}
       </CastList>
     </>
   );

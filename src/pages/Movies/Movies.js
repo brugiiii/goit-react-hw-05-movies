@@ -16,7 +16,7 @@ const api = new Api();
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(() => localStorage.getItem('query') ?? '');
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const Movies = () => {
     }
 
     setSearchParams({ query });
-    setQuery('');
+    localStorage.setItem('query', query);
   };
 
   const handleChange = e => setQuery(e.target.value);
