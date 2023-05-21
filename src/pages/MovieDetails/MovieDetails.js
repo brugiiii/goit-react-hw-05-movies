@@ -39,7 +39,7 @@ const MovieDetails = () => {
     setShowLoader(true);
 
     api.movieId = movieId;
-    api.fetch('details').then(setMovie).finally(setShowLoader(false));
+    api.fetch('details').then(res => setMovie(res)).finally(() => setShowLoader(false));
   }, [movieId]);
 
   const { poster_path, title, release_date, overview, genres, vote_average } =
